@@ -1,0 +1,11 @@
+@import 'normalize.min.css';
+
+@import 'reset.css';
+
+@import 'global.css';
+
+@import 'header.css';
+
+@import 'side-bar.css';
+
+@import 'hero.css';

@@ -1,0 +1,66 @@
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-content: flex-start;
+  background-color: #cdd3f0;
+  max-width: 860px;
+  min-height: 92vh;
+  padding-top: 60px;
+  margin-left: 350px;
+  background-image: url('../images/Wind_mill_toy.svg');
+  background-repeat: no-repeat;
+  background-size: 850px;
+}
+
+.element {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 180px;
+  height: 310px;
+  background-color: paleturquoise;
+  border: 1px solid #1d3305;
+  font-family: 'Mulish', sans-serif;
+  font-size: 0.8rem;
+  margin: 15px;
+}
+
+.element__image {
+  width: 120px;
+  height: 120px;
+}
+
+.element__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+}
+
+.description {
+  margin-left: 10px;
+  align-self: flex-start;
+}
+
+.element__updated {
+  align-self: flex-start;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  margin-left: 10px;
+}
+
+.edit {
+  margin-right: 10px;
+  width: 60px;
+  background-color: rgb(177, 190, 228);
+  border: 1px solid black;
+  border-radius: 7px;
+}
+
+.remove {
+  width: 60px;
+  background-color: #f39c9c;
+  border: 1px solid black;
+  border-radius: 7px;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@700;500;400;300&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Game room</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <header class="header container">
+      <div class="site-name">
+        <img class="logo" src="images/train.svg" alt="logo" />
+        <h1 class="title">Game room</h1>
+      </div>
+      <nav class="menu">
+        <a href="" class="menu__item outline">MyToys</a>
+        <a href="" class="menu__item">Create Toy</a>
+      </nav>
+      <div class="find-panel">
+        <input
+        id="findInput"
+          class="find-panel__input"
+          type="text"
+          size="40"
+          placeholder="type to find smth.."
+        />
+        <button onclick="findElements()" class="find-panel__find">Search</button>
+        <button  onclick="clearSerch()" class="find-panel__clear">Clear</button>
+      </div>
+    </header>
+
+    <section class="hero container">
+      <aside class="side-bar">
+        <h1 class="side-bar__title">Manage toys</h1>
+        <div class="side-bar__sort">
+          <p class="sort__statement">Sort by price of toys</p>
+          <label class="switch">
+            <input onclick="sortElements()" type="checkbox" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="side-bar__count">
+          <p class="count__text">Count total price of toys</p>
+          <button onclick="countPrice()" class="count__button">Count</button>
+        </div>
+        <div class="side-bar__summary">
+          <h1 class="summary__text">Total expenses:</h1>
+          <p id="total" class="summary__output">0</p>
+        </div>
+      </aside>
+
+      <div id="vacancyItems" class="items-container">
+
+    </section>
+    <script src="js/index.js"></script>
+    <script src="js/testJson.js"></script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  right: 0;
+  left: 0;
+  background-color: #d8dbe6;
+  border-bottom: 3px solid olive;
+}
+
+.site-name {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 35px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #13402a;
+  margin-left: 10px;
+  font-weight: normal;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  width: 240px;
+  height: 60px;
+  margin-left: 10px;
+}
+
+.menu__item {
+  padding: 16px 10px;
+}
+
+.outline {
+  background-color: #c9c8c8;
+}
+
+.find-panel {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.find-panel__input {
+  width: 180px;
+  border: 1px solid #bb8045;
+  border-radius: 6px;
+  background-color: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  height: 22px;
+}
+
+.find-panel > button {
+  border-radius: 6px;
+  background-color: transparent;
+  margin-left: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+}
+
+.find-panel__find {
+  border: 1px solid #1639b5;
+  color: #1639b5;
+}
+
+.find-panel__clear {
+  border: 1px solid #e9911e;
+  color: #e9911e;
+}
