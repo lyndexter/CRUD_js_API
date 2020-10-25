@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Game room</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="header container">
+      <div class="site-name">
+        <img class="logo" src="images/train.svg" alt="logo" />
+        <h1 class="title">Game room</h1>
+      </div>
+      <nav class="menu">
+        <a href="index.html" class="menu__item">MyToys</a>
+        <a href="" class="menu__item outline">Create Toy</a>
+      </nav>
+    </header>
+
+    <section class="create-element container">
+      <form name="createToy" action="index.html">
+        <p class="form__title">Edit Toy</p>
+
+        <label for="ageGroup">Age group for toy car:</label>
+        <input type="number" id="ageGroup" name="ageGroup" required />
+
+        <label for="price">Price(in UAH) for toy car:</label>
+        <input type="number" step="any" id="price" name="price" required />
+
+        <label for="color">Color name of toy car:</label>
+        <input type="color" id="color" name="color" required value="#000000" />
+
+        <label for="size">Size of toy car:</label>
+        <select id="size" name="size">
+          <option value="small" selected>Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+
+        <label for="doorCount">How much door have car:</label>
+        <input type="number" id="doorCount" name="doorCount" required />
+
+        <label for="length">Length of car(in mm):</label>
+        <input type="number" step="any" id="length" name="length" required />
+
+        <label for="material">Material car made of :</label>
+        <input type="text" id="material" name="material" required />
+
+        <input type="submit" class="submit" value="Edit" />
+      </form>
+    </section>
+
+    <section class="modal" id="alert">
+      <div class="alert container">
+        <span class="close" id="close">&times;</span>
+        <p id="stackTrace" class="text-error">Unexpected error</p>
+      </div>
+    </section>
+
+    <script src="js/edit.js"></script>
+  </body>
+</html>

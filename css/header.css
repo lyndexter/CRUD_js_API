@@ -33,7 +33,7 @@
   justify-content: space-around;
   font-family: 'Inter', sans-serif;
   font-size: 1.5rem;
-  width: 240px;
+  width: 260px;
   height: 60px;
   margin-left: 10px;
 }
@@ -44,6 +44,8 @@
 
 .outline {
   background-color: #c9c8c8;
+  pointer-events: none;
+  cursor: default;
 }
 
 .find-panel {
@@ -54,13 +56,13 @@
 }
 
 .find-panel__input {
-  width: 180px;
+  width: 300px;
   border: 1px solid #bb8045;
   border-radius: 6px;
   background-color: transparent;
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  height: 22px;
+  font-size: 1.1rem;
+  height: 28px;
 }
 
 .find-panel > button {
@@ -69,14 +71,4 @@
   margin-left: 5px;
   font-family: 'Inter', sans-serif;
   font-size: 1.2rem;
-}
-
-.find-panel__find {
-  border: 1px solid #1639b5;
-  color: #1639b5;
-}
-
-.find-panel__clear {
-  border: 1px solid #e9911e;
-  color: #e9911e;
 }

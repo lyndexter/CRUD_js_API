@@ -13,9 +13,9 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@700;500;400;300&display=swap"
-      rel="stylesheet"
-    />
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
 
     <title>Game room</title>
 
@@ -30,7 +30,7 @@
       </div>
       <nav class="menu">
         <a href="" class="menu__item outline">MyToys</a>
-        <a href="" class="menu__item">Create Toy</a>
+        <a href="create.html" class="menu__item">Create Toy</a>
       </nav>
       <div class="find-panel">
         <input
@@ -39,13 +39,12 @@
           type="text"
           size="40"
           placeholder="type to find smth.."
+          oninput="findElements()"
         />
-        <button onclick="findElements()" class="find-panel__find">Search</button>
-        <button  onclick="clearSerch()" class="find-panel__clear">Clear</button>
       </div>
     </header>
 
-    <section class="hero container">
+    <section class="container">
       <aside class="side-bar">
         <h1 class="side-bar__title">Manage toys</h1>
         <div class="side-bar__sort">
@@ -64,11 +63,10 @@
           <p id="total" class="summary__output">0</p>
         </div>
       </aside>
-
-      <div id="vacancyItems" class="items-container">
-
+      <div id="elementsContainer" class="items-container">
     </section>
-    <script src="js/index.js"></script>
+
     <script src="js/testJson.js"></script>
+    <script src="js/index.js" ></script>
   </body>
 </html>

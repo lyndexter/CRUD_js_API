@@ -1,104 +1,25 @@
-let sourceToyList = [
-  {
-    priceInUAH: 120,
-    ageGroup: "9",
-    color: "red",
-    size: "small",
-    doorCount: "2",
-    lengthInMM: "150",
-    material: "steel",
-    image: "images/rc-car-origin.svg",
-  },
-  {
-    priceInUAH: 300,
-    ageGroup: "9",
-    color: "red",
-    size: "medium",
-    doorCount: "2",
-    lengthInMM: "150",
-    material: "steel",
-    image: "images/rc-car-origin.svg",
-  },
-  {
-    priceInUAH: 170,
-    ageGroup: "9",
-    color: "Blue",
-    size: "small",
-    doorCount: "4",
-    lengthInMM: "120",
-    material: "steel",
-    image: "images/rc-car.svg",
-  },
-  {
-    priceInUAH: 100,
-    ageGroup: "6",
-    color: "Blue",
-    size: "small",
-    doorCount: "2",
-    lengthInMM: "80",
-    material: "steel",
-    image: "images/rc-car.svg",
-  },
-  {
-    priceInUAH: 500,
-    ageGroup: "9",
-    color: "Blue",
-    size: "medium",
-    doorCount: "4",
-    lengthInMM: "350",
-    material: "steel",
-    image: "images/rc-car.svg",
-  },
-  {
-    priceInUAH: 85,
-    ageGroup: "6",
-    color: "red",
-    size: "small",
-    doorCount: "2",
-    lengthInMM: "50",
-    material: "steel",
-    image: "images/rc-car-origin.svg",
-  },
-  {
-    priceInUAH: 2000,
-    ageGroup: "9",
-    color: "Blue",
-    size: "lerge",
-    doorCount: "4",
-    lengthInMM: "1600",
-    material: "steel",
-    image: "images/rc-car.svg",
-  },
-  {
-    priceInUAH: 90,
-    ageGroup: "3",
-    color: "red",
-    size: "small",
-    doorCount: "4",
-    lengthInMM: "70",
-    material: "steel",
-    image: "images/rc-car-origin.svg",
-  },
-  {
-    priceInUAH: 450,
-    ageGroup: "12",
-    color: "Blue",
-    size: "large",
-    doorCount: "4",
-    lengthInMM: "300",
-    material: "steel",
-    image: "images/rc-car.svg",
-  },
-];
+// let sourceToyList = JSON.parse(localStorage.getItem("SourceToyList"));
+addElement();
+// localStorage.removeItem("newToy");
+function addElement() {
+  sourceToyList = JSON.parse(localStorage.getItem("SourceToyList"));
+  let newToy = JSON.parse(localStorage.getItem("NewToy"));
+  if (newToy != null) {
+    sourceToyList = sourceToyList.concat(newToy);
+  }
+
+  localStorage.removeItem("NewToy");
+
+  localStorage.setItem("SourceToyList", JSON.stringify(sourceToyList));
+}
 
 var toyList = [...sourceToyList];
-
-const vacancyItems = document.getElementById("vacancyItems");
+const elementsContainer = document.getElementById("elementsContainer");
 
 var i = 0;
 
 function sortElements() {
-  if (i % 2 == 0) {
+  if (i == 0) {
     toyList.sort(function (obj1, obj2) {
       return obj1.priceInUAH < obj2.priceInUAH ? -1 : 1;
     });
@@ -106,7 +27,7 @@ function sortElements() {
     toyList.reverse();
   }
   i++;
-  showVacancies(toyList);
+  showToys(toyList);
 }
 
 function countPrice() {
@@ -118,48 +39,46 @@ function countPrice() {
 }
 
 function findElements() {
+  toyList = sourceToyList;
   var sample = document.getElementById("findInput").value;
   var resultList = [];
   toyList.forEach((item) => {
-    switch (sample) {
-      case item.priceInUAH.toString():
+    switch (true) {
+      case item.priceInUAH.toString().includes(sample):
         resultList.push(item);
         break;
-      case item.ageGroup:
+      case item.ageGroup.includes(sample):
         resultList.push(item);
         break;
-      case item.color:
+      case item.color.includes(sample):
         resultList.push(item);
         break;
-      case item.size:
+      case item.size.includes(sample):
         resultList.push(item);
         break;
-      case item.doorCount:
+      case item.doorCount.includes(sample):
         resultList.push(item);
         break;
-      case item.lengthInMM:
+      case item.lengthInMM.includes(sample):
         resultList.push(item);
         break;
-      case item.material:
+      case item.material.includes(sample):
         resultList.push(item);
         break;
     }
   });
   toyList = resultList;
-  showVacancies(toyList);
+  if (sample == "") {
+    toyList = sourceToyList;
+  }
+  showToys(toyList);
 }
 
-function clearSerch() {
-  document.getElementById("findInput").value = "";
-  toyList = [...sourceToyList];
-  showVacancies(toyList);
-}
+showToys(toyList);
 
-showVacancies(toyList);
-
-function showVacancies(panlList) {
+function showToys(panlList) {
   let innerItem = "";
-  panlList.forEach((item) => {
+  panlList.forEach((item, index) => {
     innerItem += `
       <div class="element">
   <img class="element__image" src=${item.image} alt="" />
@@ -175,11 +94,22 @@ function showVacancies(panlList) {
   </div>
   <h3 class="element__updated">Last time updated: 10.04.2020</h3>
   <div class="element__change-controls">
-    <button class="edit">Edit</button>
-    <button class="remove">Remove</button>
+    <button onclick="goToEdit(${index})" class="edit">Edit</button>
+    <button onclick="removeElement(${index})" class="remove">Remove</button>
   </div>
 </div>`;
   });
 
-  vacancyItems.innerHTML = innerItem;
+  elementsContainer.innerHTML = innerItem;
+}
+
+function removeElement(index) {
+  sourceToyList.splice(index, 1);
+  toyList.splice(index, 1);
+  showToys(toyList);
+  localStorage.setItem("SourceToyList", JSON.stringify(sourceToyList));
+}
+
+function goToEdit(index) {
+  window.location = "/edit.html?index=" + index;
 }
