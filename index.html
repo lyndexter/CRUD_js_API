@@ -39,7 +39,6 @@
           type="text"
           size="40"
           placeholder="type to find smth.."
-          oninput="findElements()"
         />
       </div>
     </header>
@@ -50,13 +49,13 @@
         <div class="side-bar__sort">
           <p class="sort__statement">Sort by price of toys</p>
           <label class="switch">
-            <input onclick="sortElements()" type="checkbox" />
+            <input id="sortElement" type="checkbox" />
             <span class="slider"></span>
           </label>
         </div>
         <div class="side-bar__count">
           <p class="count__text">Count total price of toys</p>
-          <button onclick="countPrice()" class="count__button">Count</button>
+          <button id="countPrice" class="count__button">Count</button>
         </div>
         <div class="side-bar__summary">
           <h1 class="summary__text">Total expenses:</h1>
@@ -66,7 +65,6 @@
       <div id="elementsContainer" class="items-container">
     </section>
 
-    <script src="js/testJson.js"></script>
-    <script src="js/index.js" ></script>
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>
