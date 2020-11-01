@@ -1,3 +1,5 @@
+import { updateToyCars } from "./api.js";
+
 let index;
 
 window.onload = () => {
@@ -47,18 +49,14 @@ form.addEventListener("submit", function (event) {
   }
 
   newToy = {
-    priceInUAH: parseInt(price),
+    priceInUAH: price,
     ageGroup: ageGroup,
     color: color,
     size: size,
     doorCount: doorCount,
     lengthInMM: length,
     material: material,
-    image: "images/rc-car.svg",
   };
 
-  toys = JSON.parse(localStorage.getItem("SourceToyList"));
-  toys[index] = newToy;
-  console.log(toys, index);
-  localStorage.setItem("SourceToyList", JSON.stringify(toys));
+  updateToyCars(index, newToy);
 });

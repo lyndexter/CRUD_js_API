@@ -1,24 +1,26 @@
-// let sourceToyList = JSON.parse(localStorage.getItem("SourceToyList"));
+import { getAllToyCars, deleteToyCar } from "./api.js";
+
+let toyList;
+let sourceToyList;
+
+const addElement = async () => {
+  const toyCars = await getAllToyCars();
+  console.log(toyCars);
+  toyList = toyCars;
+  sourceToyList = toyCars;
+
+  showToys(toyList);
+  addEvent();
+};
 addElement();
-// localStorage.removeItem("newToy");
-function addElement() {
-  sourceToyList = JSON.parse(localStorage.getItem("SourceToyList"));
-  let newToy = JSON.parse(localStorage.getItem("NewToy"));
-  if (newToy != null) {
-    sourceToyList = sourceToyList.concat(newToy);
-  }
 
-  localStorage.removeItem("NewToy");
-
-  localStorage.setItem("SourceToyList", JSON.stringify(sourceToyList));
-}
-
-var toyList = [...sourceToyList];
 const elementsContainer = document.getElementById("elementsContainer");
+const sortElement = document.getElementById("sortElement");
+const findElement = document.getElementById("findInput");
+const countPrice = document.getElementById("countPrice");
 
 var i = 0;
-
-function sortElements() {
+sortElement.onclick = () => {
   if (i == 0) {
     toyList.sort(function (obj1, obj2) {
       return obj1.priceInUAH < obj2.priceInUAH ? -1 : 1;
@@ -28,17 +30,18 @@ function sortElements() {
   }
   i++;
   showToys(toyList);
-}
+  addEvent();
+};
 
-function countPrice() {
+countPrice.onclick = () => {
   var totalPrice = 0;
   toyList.forEach((item) => {
     totalPrice += item.priceInUAH;
   });
   document.getElementById("total").innerHTML = totalPrice;
-}
+};
 
-function findElements() {
+findElement.oninput = () => {
   toyList = sourceToyList;
   var sample = document.getElementById("findInput").value;
   var resultList = [];
@@ -47,7 +50,7 @@ function findElements() {
       case item.priceInUAH.toString().includes(sample):
         resultList.push(item);
         break;
-      case item.ageGroup.includes(sample):
+      case item.ageGroup.toString().includes(sample):
         resultList.push(item);
         break;
       case item.color.includes(sample):
@@ -56,10 +59,10 @@ function findElements() {
       case item.size.includes(sample):
         resultList.push(item);
         break;
-      case item.doorCount.includes(sample):
+      case item.doorCount.toString().includes(sample):
         resultList.push(item);
         break;
-      case item.lengthInMM.includes(sample):
+      case item.lengthInMM.toString().includes(sample):
         resultList.push(item);
         break;
       case item.material.includes(sample):
@@ -72,16 +75,15 @@ function findElements() {
     toyList = sourceToyList;
   }
   showToys(toyList);
-}
+  addEvent();
+};
 
-showToys(toyList);
-
-function showToys(panlList) {
+const showToys = (panlList) => {
   let innerItem = "";
-  panlList.forEach((item, index) => {
+  panlList.forEach((item) => {
     innerItem += `
-      <div class="element">
-  <img class="element__image" src=${item.image} alt="" />
+      <div  class="element">
+  <img class="element__image" src="images/rc-car${item.id % 2}.svg" alt="" />
   <h1 class="element__name">Toy Car</h1>
   <div class="description">
     <p>For age group: ${item.ageGroup}</p>
@@ -94,22 +96,31 @@ function showToys(panlList) {
   </div>
   <h3 class="element__updated">Last time updated: 10.04.2020</h3>
   <div class="element__change-controls">
-    <button onclick="goToEdit(${index})" class="edit">Edit</button>
-    <button onclick="removeElement(${index})" class="remove">Remove</button>
+    <button  id ="edit-button${item.id}" class="edit">Edit</button>
+    <button id ="remove-button${item.id}" class="remove">Remove</button>
   </div>
 </div>`;
   });
 
   elementsContainer.innerHTML = innerItem;
-}
+};
 
-function removeElement(index) {
-  sourceToyList.splice(index, 1);
-  toyList.splice(index, 1);
-  showToys(toyList);
-  localStorage.setItem("SourceToyList", JSON.stringify(sourceToyList));
-}
+const goToEdit = (e) => {
+  const id = e.target.id.replace("edit-button", "");
+  window.location = "/edit.html?index=" + id;
+};
+const removeElement = (e) => {
+  console.log(e);
+  const id = e.target.id.replace("remove-button", "");
+  deleteToyCar(id).then(addElement);
+};
 
-function goToEdit(index) {
-  window.location = "/edit.html?index=" + index;
-}
+const addEvent = () => {
+  toyList.forEach((item) => {
+    const removebtn = document.getElementById(`remove-button${item.id}`);
+    const editbtn = document.getElementById(`edit-button${item.id}`);
+    console.log({ removebtn });
+    removebtn.addEventListener("click", removeElement);
+    editbtn.addEventListener("click", goToEdit);
+  });
+};

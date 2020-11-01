@@ -1,3 +1,5 @@
+import { postToyCars } from "./api.js";
+
 let message = document.getElementById("alert");
 
 let closeAlert = document.getElementById("close");
@@ -19,7 +21,6 @@ form.addEventListener("submit", function (event) {
   let material = document.forms["createToy"]["material"].value;
 
   let textError = "Oh snap! ";
-  console.log("eeee");
   if (ageGroup > 18 || ageGroup < 0) {
     textError += "You entered incorect age! ";
   }
@@ -39,23 +40,16 @@ form.addEventListener("submit", function (event) {
     document.getElementById("stackTrace").innerHTML = textError;
     return;
   }
-  console.log("eeee");
 
-  newToy = [
-    {
-      priceInUAH: parseInt(price),
-      ageGroup: ageGroup,
-      color: color,
-      size: size,
-      doorCount: doorCount,
-      lengthInMM: length,
-      material: material,
-      image: "images/rc-car.svg",
-    },
-  ];
+  newToy = {
+    priceInUAH: price,
+    ageGroup: ageGroup,
+    size: size,
+    color: color,
+    doorCount: doorCount,
+    lengthInMM: length,
+    material: material,
+  };
 
-  // toyList = JSON.parse(localStorage.getItem("SourceToyList"));
-  // toyList.push(newToy);
-  // console.log(toyList, newToy);
-  localStorage.setItem("NewToy", JSON.stringify(newToy));
+  postToyCars(newToy);
 });
