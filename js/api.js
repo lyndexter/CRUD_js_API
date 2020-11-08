@@ -34,3 +34,9 @@ export const updateToyCars = async (id, body) =>
 
 export const deleteToyCar = (id) =>
   baseRequest({ urlPath: `/${id}`, method: "DELETE" });
+
+export const getToyCar = async (id) => {
+  const response = await baseRequest({ urlPath: `/${id}`, method: "GET" });
+
+  return await response.json();
+};

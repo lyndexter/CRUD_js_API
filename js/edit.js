@@ -1,10 +1,28 @@
-import { updateToyCars } from "./api.js";
+import { updateToyCars, getToyCar } from "./api.js";
 
 let index;
 
-window.onload = () => {
+let ageGroup = document.forms["createToy"]["ageGroup"];
+let price = document.forms["createToy"]["price"];
+let color = document.forms["createToy"]["color"];
+let size = document.forms["createToy"]["size"];
+let doorCount = document.forms["createToy"]["doorCount"];
+let length = document.forms["createToy"]["length"];
+let material = document.forms["createToy"]["material"];
+
+window.onload = async () => {
   let url = document.location.href;
   index = url.split("?")[1].split("=")[1];
+
+  const item = await getToyCar(index);
+
+  ageGroup.value = item.ageGroup;
+  price.value = item.priceInUAH;
+  color.value = item.color;
+  size.value = item.size;
+  doorCount.value = item.doorCount;
+  length.value = item.lengthInMM;
+  material.value = item.material;
 };
 
 let message = document.getElementById("alert");
@@ -19,25 +37,25 @@ let form = document.forms["createToy"];
 let newToy;
 
 form.addEventListener("submit", function (event) {
-  let ageGroup = document.forms["createToy"]["ageGroup"].value;
-  let price = document.forms["createToy"]["price"].value;
-  let color = document.forms["createToy"]["color"].value;
-  let size = document.forms["createToy"]["size"].value;
-  let doorCount = document.forms["createToy"]["doorCount"].value;
-  let length = document.forms["createToy"]["length"].value;
-  let material = document.forms["createToy"]["material"].value;
+  let inputAgeGroup = ageGroup.value;
+  let inputPrice = price.value;
+  let inputColor = color.value;
+  let inputSize = size.value;
+  let inputDoorCount = doorCount.value;
+  let inputLength = length.value;
+  let inputMaterial = material.value;
 
   let textError = "Oh snap! ";
-  if (ageGroup > 18 || ageGroup < 0) {
+  if (inputAgeGroup > 18 || inputAgeGroup < 0) {
     textError += "You entered incorect age! ";
   }
-  if (price > 999999 || price < 0) {
+  if (inputPrice > 999999 || inputPrice < 0) {
     textError += "You entered incorect price of car! ";
   }
-  if (doorCount > 10 || doorCount < 0) {
+  if (inputDoorCount > 10 || inputDoorCount < 0) {
     textError += "You entered incorect number of door! ";
   }
-  if (length > 10000 || length < 0) {
+  if (inputLength > 10000 || inputLength < 0) {
     textError += "You entered incorect length of car! ";
   }
 
@@ -49,13 +67,13 @@ form.addEventListener("submit", function (event) {
   }
 
   newToy = {
-    priceInUAH: price,
-    ageGroup: ageGroup,
-    color: color,
-    size: size,
-    doorCount: doorCount,
-    lengthInMM: length,
-    material: material,
+    priceInUAH: inputPrice,
+    ageGroup: inputAgeGroup,
+    color: inputColor,
+    size: inputSize,
+    doorCount: inputDoorCount,
+    lengthInMM: inputLength,
+    material: inputMaterial,
   };
 
   updateToyCars(index, newToy);

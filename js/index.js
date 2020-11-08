@@ -13,6 +13,7 @@ const addElement = async () => {
   addEvent();
 };
 addElement();
+console.log(toyList);
 
 const elementsContainer = document.getElementById("elementsContainer");
 const sortElement = document.getElementById("sortElement");
@@ -107,7 +108,7 @@ const showToys = (panlList) => {
 
 const goToEdit = (e) => {
   const id = e.target.id.replace("edit-button", "");
-  window.location = "/edit.html?index=" + id;
+  window.location = "/edit.html?toyId=" + id;
 };
 const removeElement = (e) => {
   console.log(e);
